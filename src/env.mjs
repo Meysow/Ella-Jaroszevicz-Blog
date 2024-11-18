@@ -27,10 +27,19 @@ export const env = createEnv({
       .min(1, "NEXT_PUBLIC_SANITY_DATASET is required"),
     NEXT_PUBLIC_SANITY_API_VERSION: z
       .string()
-      .regex(
-        /^\d{4}-\d{2}-\d{2}$/,
-        "Invalid API version format. Use YYYY-MM-DD"
-      ),
+      .default("2024-11-14")
+      .transform((val) => {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(val)) {
+          throw new Error("Invalid API version format. Use YYYY-MM-DD");
+        }
+        return val;
+      }),
+    NEXT_PUBLIC_SUPABASE_URL: z
+      .string()
+      .url("NEXT_PUBLIC_SUPABASE_URL must be a valid URL"),
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: z
+      .string()
+      .min(1, "NEXT_PUBLIC_SUPABASE_ANON_KEY is required"),
   },
 
   /**
@@ -43,5 +52,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
     NEXT_PUBLIC_SANITY_API_VERSION: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   },
 });
