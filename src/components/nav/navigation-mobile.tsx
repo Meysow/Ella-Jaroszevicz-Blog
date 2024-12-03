@@ -12,6 +12,8 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+
 interface NavigationMobileProps {
   navItems: NavItem[];
 }
@@ -53,6 +55,7 @@ export function NavigationMobile({ navItems }: NavigationMobileProps) {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild className="transition-all duration-300 ease-in-out">
         <Button variant="navbarIcon" size="icon" className="md:hidden">
+          <HamburgerMenuIcon />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>

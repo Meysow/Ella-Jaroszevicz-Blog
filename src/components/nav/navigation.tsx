@@ -15,6 +15,7 @@ import {
 
 interface NavigationProps {
   navItems: NavItem[];
+  activeItem?: string;
 }
 
 export function Navigation({ navItems }: NavigationProps): JSX.Element {
